@@ -1,0 +1,109 @@
+name: CI & CD
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: ['**']
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  NODE_VERSION: 24
+
+jobs:
+  validate:
+    name: Validate Branch & Commit & PR 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Validate branch name
+        if: github.event_name == 'pull_request' && github.base_ref == 'develop'
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          if [[ ! "$BRANCH_NAME" =~ ^(feature|fix|refactor|chore|test)/[a-z0-9-]+$ ]]; then
+            echo "::error::Invalid branch name '$BRANCH_NAME'. Expected format: type/description"
+            exit 1
+          fi
+
+      - name: Restrict merge to main
+        if: github.event_name == 'pull_request' && github.base_ref == 'main'
+        run: |
+          SOURCE_BRANCH="${{ github.head_ref }}"
+          if [ "$SOURCE_BRANCH" != "develop" ]; then
+            echo "::error::Only 'develop' branch can be merged into main"
+            exit 1
+          fi
+
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run type-check
+
+  # tests:
+  #   name: Unit Tests
+  #   runs-on: ubuntu-latest
+  #   needs: validate
+  #   timeout-minutes: 10
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #     - uses: actions/setup-node@v6
+  #       with:
+  #         node-version: ${{ env.NODE_VERSION }}
+  #         cache: npm
+  #     - run: npm ci
+  #     - run: npm run test:unit
+
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      - name: Upload build artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v5
