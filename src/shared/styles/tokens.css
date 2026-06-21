@@ -1,38 +1,82 @@
 :root {
-  /* Core palette */
-  --primary: #0d9488;
+  --primary: #6366f1;
   --primary-foreground: #ffffff;
 
-  --background: #f8fafb;
+  --background: #f8fafc;
   --foreground: #111827;
 
   --card: #ffffff;
   --card-foreground: #111827;
 
-  --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+
+  --surface-1: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #f1f5f9;
+
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
 
   --border: #e5e7eb;
   --input: #e5e7eb;
-  --ring: #0d9488;
+  --ring: #6366f1;
+
+  --success: #22c55e;
+  --success-foreground: #ffffff;
+
+  --warning: #f59e0b;
+  --warning-foreground: #ffffff;
 
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
 
-  --radius: 12px;
+  --patient-stable: #22c55e;
+  --patient-warning: #f59e0b;
+  --patient-critical: #ef4444;
 
-  /* Sidebar */
-  --sidebar: #ffffff;
-  --sidebar-foreground: #111827;
-  --sidebar-primary: #0d9488;
+  --bed-stable-bg: #f0fdf4;
+  --bed-stable-border: #bbf7d0;
+
+  --bed-warning-bg: #fffbeb;
+  --bed-warning-border: #fde68a;
+
+  --bed-critical-bg: #fef2f2;
+  --bed-critical-border: #fecaca;
+
+  --bed-empty-bg: #f8fafc;
+  --bed-empty-border: #e5e7eb;
+
+  --metric-success: #22c55e;
+  --metric-warning: #f59e0b;
+  --metric-critical: #ef4444;
+  --metric-info: #3b82f6;
+
+  --sidebar: #0f172a;
+  --sidebar-foreground: #f8fafc;
+
+  --sidebar-primary: #6366f1;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: #0d9488;
 
-  /* Charts */
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --sidebar-border: #1e293b;
+  --sidebar-ring: #6366f1;
+
+  --sidebar-active-bg: rgba(255, 255, 255, 0.08);
+  --sidebar-active-foreground: #ffffff;
+
+  --chart-1: #6366f1;
+  --chart-2: #3b82f6;
+  --chart-3: #22c55e;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04);
+
+  --shadow-card-hover: 0 8px 24px rgba(15, 23, 42, 0.08);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
 }
