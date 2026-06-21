@@ -51,6 +51,27 @@ export default antfu(
           },
         },
       ],
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/modules/*/*'],
+              message: 'Architecture error: import the module only through its Public API (index.ts). Deep imports inside the module are prohibited.',
+            },
+            {
+              group: ['@modules/*/*'],
+              message: 'Architecture error: import the module only through its Public API (index.ts).',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/shared/ui/**/*.tsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
 )
