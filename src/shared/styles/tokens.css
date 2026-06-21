@@ -1,0 +1,37 @@
+:root {
+  /* Core palette */
+  --primary: #0d9488;
+  --primary-foreground: #ffffff;
+
+  --background: #f8fafb;
+  --foreground: #111827;
+
+  --card: #ffffff;
+  --card-foreground: #111827;
+
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --radius: 12px;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #0d9488;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #0d9488;
+
+  /* Charts */
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+}
