@@ -8,6 +8,7 @@ function Toaster({ ...props }: ToasterProps) {
   const { theme = 'system' } = useTheme()
 
   return (
+    // @ts-expect-error shadcn template is incompatible with exactOptionalPropertyTypes
     <Sonner
       theme={theme as ToasterProps['theme']}
       className="toaster group"

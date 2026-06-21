@@ -89,6 +89,7 @@ function DropdownMenuCheckboxItem({
   inset?: boolean
 }) {
   return (
+    // @ts-expect-error shadcn template is incompatible with exactOptionalPropertyTypes
     <DropdownMenuPrimitive.CheckboxItem
       data-slot="dropdown-menu-checkbox-item"
       data-inset={inset}
