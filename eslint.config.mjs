@@ -43,33 +43,10 @@ export default antfu(
       'antfu/no-top-level-await': ['off'],
       'node/prefer-global/process': ['off'],
       'node/no-process-env': ['error'],
-      'perfectionist/sort-imports': [
-        'error',
-        {
-          tsconfig: {
-            rootDir: '.',
-          },
-        },
-      ],
-      'no-restricted-imports': [
-        'error',
-        {
-          patterns: [
-            {
-              group: ['@/modules/*/*'],
-              message: 'Architecture error: import the module only through its Public API (index.ts). Deep imports inside the module are prohibited.',
-            },
-            {
-              group: ['@modules/*/*'],
-              message: 'Architecture error: import the module only through its Public API (index.ts).',
-            },
-          ],
-        },
-      ],
     },
   },
   {
-    files: ['src/shared/ui/**/*.tsx'],
+    files: ['apps/web/src/shared/ui/**/*.tsx'],
     rules: {
       'react-refresh/only-export-components': 'off',
     },
