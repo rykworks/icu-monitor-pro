@@ -56,9 +56,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run type-check
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run type-check
 
   # tests:
   #   name: Unit Tests
@@ -71,8 +71,8 @@ jobs:
   #       with:
   #         node-version: ${{ env.NODE_VERSION }}
   #         cache: npm
-  #     - run: npm ci
-  #     - run: npm run test:unit
+  #     - run: pnpm install --frozen-lockfile
+  #     - run: pnpm run test:unit
 
   build:
     name: Build Application
@@ -84,8 +84,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci
-      - run: npm run build
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
 
       - name: Upload build artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
